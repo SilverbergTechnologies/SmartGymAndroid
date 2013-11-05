@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SmartGym</string>
+    <string name="action_settings">Settings</string>
+    <string name="profile_prompt">Choose a profile</string>
+
+    <string-array name="profile_array">
+        <item>Choose running profile</item>
+        <item>Marathon</item>
+        <item>Sprints</item>
+    </string-array>
+
+    <string name="exercise_log">Exercise Log</string>
+    <string name="running_profiles">Running Profiles</string>
+    <string name="start_exercise">Start Exercise</string>
+    <string name="choose_week">Choose a Week</string>
+
+    <string-array name="exercise_list_array">
+        <item>Choose running profile</item>
+        <item>Marathon</item>
+        <item>Sprints</item>
+    </string-array>
+
+    <string name="full_name_hint">Full name</string>
+    <string name="email_hint">E-mail</string>
+    <string name="password_hint">Password</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="marathon_profile">Marathon</string>
+    <string name="sprint_profile">Sprints</string>
+    <string name="hiit_profile">HIIT</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_profiles">ProfilesActivity</string>
+
+</resources>
