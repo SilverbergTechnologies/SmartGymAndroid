@@ -40,6 +40,10 @@ public class HomeActivity extends Activity {
         startActivity(intent);
     }
 
+    public void openExercise(View view) {
+        Intent intent = new Intent(this, ExerciseActivity.class);
+        startActivity(intent);
+    }
 
     
 }

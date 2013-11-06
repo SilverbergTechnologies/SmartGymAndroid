@@ -7,8 +7,8 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
-    
-    <uses-permission android:name="android.permission.INTERNET" /> 
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.hardware.usb.acceessory"
@@ -19,7 +19,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
         <uses-library
             android:name="com.android.future.usb.accessory"
             android:required="false" />
@@ -38,8 +37,8 @@
             </intent-filter>
         </activity>
         <activity
-             android:name="is.silverberg.smartgymandroid.HomeActivity"
-             android:label="@string/title_activity_home">
+            android:name="is.silverberg.smartgymandroid.HomeActivity"
+            android:label="@string/title_activity_home" >
         </activity>
         <activity
             android:name="is.silverberg.smartgymandroid.ProfilesActivity"
@@ -48,6 +47,22 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="is.silverberg.smartgymandroid.HomeActivity" />
+        </activity>
+        <activity
+            android:name="is.silverberg.smartgymandroid.ExerciseActivity"
+            android:label="@string/title_activity_exercise"
+            android:parentActivityName="is.silverberg.smartgymandroid.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="is.silverberg.smartgymandroid.HomeActivity" />
+        </activity>
+        <activity
+            android:name="is.silverberg.smartgymandroid.RegisterActivity"
+            android:label="@string/title_activity_register"
+            android:parentActivityName="is.silverberg.smartgymandroid.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="is.silverberg.smartgymandroid.MainActivity" />
         </activity>
     </application>
 
