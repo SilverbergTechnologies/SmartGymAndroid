@@ -30,7 +30,7 @@ public class ExerciseActivity extends Activity {
 		int size = 20;
 		GraphViewData[] data = new GraphViewData[size];
 		for (int i=0; i<size; i++) {
-			data[i] = new GraphViewData(i, rand.nextInt(20));
+			data[i] = new GraphViewData(i, rand.nextInt(10)+5);
 		}
 		GraphViewSeries exampleSeries = new GraphViewSeries(data);
 
@@ -38,7 +38,7 @@ public class ExerciseActivity extends Activity {
 
 		graphView = new LineGraphView(
 				this // context
-				, "Kalor’ur / m’n" // heading
+				, "Calories / min" // heading
 		);
 		
 		graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.BLACK);  
