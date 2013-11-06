@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.jjoe64.graphview.CustomLabelFormatter;
 import com.jjoe64.graphview.GraphView;
@@ -18,6 +19,12 @@ import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 
 public class ExerciseActivity extends Activity {
+	
+	TextView maxSpeed;
+	TextView minSpeed;
+	TextView distance;
+	int max, min;
+	
 	/** Called when the activity is first created. */
 	@SuppressLint("SimpleDateFormat")
 	@Override
@@ -30,7 +37,11 @@ public class ExerciseActivity extends Activity {
 		int size = 20;
 		GraphViewData[] data = new GraphViewData[size];
 		for (int i=0; i<size; i++) {
-			data[i] = new GraphViewData(i, rand.nextInt(10)+5);
+			int tmp = rand.nextInt(15);
+			if(i==0){ max = tmp; min = tmp; }
+			if(tmp > max) { max = tmp; }
+			if(tmp < min) { min = tmp; }
+			data[i] = new GraphViewData(i, tmp+5);
 		}
 		GraphViewSeries exampleSeries = new GraphViewSeries(data);
 
@@ -38,7 +49,7 @@ public class ExerciseActivity extends Activity {
 
 		graphView = new LineGraphView(
 				this // context
-				, "Calories / min" // heading
+				, "km / hour" // heading
 		);
 		
 		graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.BLACK);  
@@ -88,6 +99,11 @@ public class ExerciseActivity extends Activity {
 			}
 		});
 
-
+		maxSpeed = (TextView)findViewById(R.id.maxSpeed);
+		minSpeed = (TextView)findViewById(R.id.minSpeed);
+		distance = (TextView)findViewById(R.id.distance);
+		maxSpeed.setText("Maximum speed: " + String.valueOf(max+5) + " km/h");
+		minSpeed.setText("Minimum speed: " + String.valueOf(min+5) + " km/h");
+		distance.setText("Distance: 5 km");
 	}
 }

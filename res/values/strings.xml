@@ -36,5 +36,6 @@
     <string name="title_activity_profiles">ProfilesActivity</string>
     <string name="title_activity_exercise">ExerciseActivity</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="empty"></string>
 
 </resources>
