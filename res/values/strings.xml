@@ -24,6 +24,7 @@
 
     <string name="full_name_hint">Full name</string>
     <string name="email_hint">E-mail</string>
+    <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
