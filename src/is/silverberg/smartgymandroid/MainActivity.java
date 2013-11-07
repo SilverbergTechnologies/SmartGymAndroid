@@ -11,11 +11,19 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Class for displaying and interacting with login screen
+ * @author Silverberg
+ *
+ */
 public class MainActivity extends Activity {
 
 	public final static String EXTRA_EMAIL = "com.example.smartgym.EMAIL";
 	public final static String EXTRA_PASSWORD = "com.example.smartgym.PASSWORD";
 	
+	/**
+	 * Called when activity is opened
+	 */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +31,9 @@ public class MainActivity extends Activity {
     }
 
 
+    /**
+     * Called when options menu is created.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -45,10 +56,6 @@ public class MainActivity extends Activity {
 	    		result = dbHandler.checkPassword(passwordInput.getText().toString(), user.getPassword(), user.getSalt());    		
 	    	} catch( NoSuchAlgorithmException e ) {}
     	}
-  //  	String email = emailInput.getText().toString();
-  //  	String password = passwordInput.getText().toString();
-  //  	intent.putExtra(EXTRA_EMAIL, email);
-  //  	intent.putExtra(EXTRA_PASSWORD, password);
     	if(result) {
     		startActivity(intent);    		
     	} else {
@@ -59,6 +66,10 @@ public class MainActivity extends Activity {
     	}
     }
     
+    /**
+     * Called when the user presses the Register button
+     * @param view
+     */
     public void register(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);

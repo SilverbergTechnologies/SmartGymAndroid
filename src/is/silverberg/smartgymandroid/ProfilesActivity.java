@@ -7,8 +7,17 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
+/**
+ * Class for displaying and interacting with Profiles Activity
+ * UNFINISHED
+ * @author Silverberg
+ *
+ */
 public class ProfilesActivity extends Activity {
 
+	/**
+	 * Called when activity is opened
+	 */
     @SuppressLint("NewApi")
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,6 +31,9 @@ public class ProfilesActivity extends Activity {
         }
     }
 
+    /**
+     * Called when an option in options menu is selected
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

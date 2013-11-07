@@ -173,6 +173,11 @@ public class DBHandler extends SQLiteOpenHelper {
 		return result;
 	}
 	
+	/**
+	 * A method to convert a hexadecimal String to byte array
+	 * @param hex
+	 * @return
+	 */
     private byte[] fromHex(String hex)
     {
         byte[] binary = new byte[hex.length() / 2];
@@ -183,6 +188,11 @@ public class DBHandler extends SQLiteOpenHelper {
         return binary;
     }
 
+    /**
+     * A method to convert a byte array to a hexadecimal String
+     * @param array
+     * @return
+     */
 	public String toHex(byte[] array)
     {
         BigInteger bi = new BigInteger(1, array);

@@ -18,6 +18,12 @@ import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 
+/**
+ * Class for displaying activity and displaying exercise data.
+ * UNFINISHED, Contains test data at the moment. 
+ * @author Silverberg
+ *
+ */
 public class ExerciseActivity extends Activity {
 	
 	TextView maxSpeed;
