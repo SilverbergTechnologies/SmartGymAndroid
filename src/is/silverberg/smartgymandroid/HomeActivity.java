@@ -6,12 +6,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.view.MenuItem;
 import android.view.View;
 
+/**
+ * Class for displaying and interacting with Home Activity
+ * @author Silverberg
+ *
+ */
 public class HomeActivity extends Activity {
 
+	/**
+	 * Called when activity is opened
+	 */
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,25 +27,29 @@ public class HomeActivity extends Activity {
         // Make sure we're running on Honeycomb or higher to use ActionBar APIs
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // Show the Up button in the action bar.
-            getActionBar().setDisplayHomeAsUpEnabled(true);
+            getActionBar().setDisplayHomeAsUpEnabled(false);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case android.R.id.home:
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
     
+    /**
+     * Called when profiles button is pressed.
+     * Opens profiles activity.
+     * @param view
+     */
     public void openProfiles(View view) {
         Intent intent = new Intent(this, ProfilesActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Called when exercises button is presed.
+     * Opens exercises activity.
+     * @param view
+     */
+    public void openExercise(View view) {
+        Intent intent = new Intent(this, ExerciseActivity.class);
+        startActivity(intent);
+    }
 
     
 }
