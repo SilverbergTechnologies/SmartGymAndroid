@@ -2,14 +2,21 @@ package is.silverberg.smartgymandroid;
 
 import java.security.NoSuchAlgorithmException;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import android.hardware.usb.UsbAccessory;
+import android.hardware.usb.UsbManager;
+import com.lf.api.License;
+import is.silverberg.smartgymandroid.LFOpen;
 
 /**
  * Class for displaying and interacting with login screen
@@ -21,6 +28,41 @@ public class MainActivity extends Activity {
 	public final static String EXTRA_EMAIL = "com.example.smartgym.EMAIL";
 	public final static String EXTRA_PASSWORD = "com.example.smartgym.PASSWORD";
 	
+	
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		checkIntentIfFromEquipement(intent);
+
+	}
+
+	@SuppressLint("NewApi")
+	private void checkIntentIfFromEquipement(Intent intent) {
+		if (intent.getAction().equals(UsbManager.ACTION_USB_ACCESSORY_ATTACHED)) {
+			Toast.makeText(MainActivity.this, "USB accessory attached", Toast.LENGTH_LONG).show();
+			
+			startService(new Intent(MainActivity.this, LFOpen.class));
+
+			UsbManager manager = (UsbManager) getSystemService(USB_SERVICE);
+			UsbAccessory[] accessoryList = manager.getAccessoryList();
+			// THIS IS TO GET THE MODEL OF THE CONSOLE.
+			if (accessoryList[0] != null) {
+				String returnStr = "";
+				returnStr += "Manufacturer:" + accessoryList[0].getManufacturer() + "\n";
+				returnStr += "Model:" + accessoryList[0].getModel() + "\n";
+				returnStr += "Description:" + accessoryList[0].getDescription() + "\n";
+				Toast.makeText(MainActivity.this, returnStr, Toast.LENGTH_LONG).show();
+
+			}
+
+		}
+
+	}
+	
+	
+	
+	/* ----------------------------------------------------------------------------------*/
+	
 	/**
 	 * Called when activity is opened
 	 */
@@ -28,6 +70,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+//        License.getInstance().setEnvironmentToLive(MainActivity.this, true);
+        License.getInstance().setLicense(this,"380-5619134716-54906");
+        
+		checkIntentIfFromEquipement(getIntent());
+
     }
 
 

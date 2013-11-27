@@ -32,8 +32,12 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+				<action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+			    android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
+			    android:resource="@xml/accessory_data" />
         </activity>
         <activity
             android:name="is.silverberg.smartgymandroid.HomeActivity"
@@ -62,6 +66,11 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="is.silverberg.smartgymandroid.MainActivity" />
+        </activity>
+        <activity
+            android:name="is.silverberg.smartgymandroid.WorkoutActivity"
+            android:label="@string/title_activity_workout" >
+            
         </activity>
     </application>
 
