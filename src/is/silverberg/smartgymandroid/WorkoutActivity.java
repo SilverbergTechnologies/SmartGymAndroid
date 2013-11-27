@@ -1,6 +1,5 @@
 package is.silverberg.smartgymandroid;
 
-import java.util.Calendar;
 import java.util.List;
 
 import android.app.Activity;
@@ -242,21 +241,22 @@ public class WorkoutActivity extends Activity {
 
 		@Override
 		public void onWorkoutResultReceived(final WorkoutResult workoutresult) {
-			finalDistance = workoutresult.getDistance();
-			finalCalories = workoutresult.getCalories();
-			currentDate = workoutresult.getWorkoutDate().toString();
-			finalElapsedTime = workoutresult.getElapsedTime();
+//			finalDistance = workoutresult.getDistance();
+//			finalCalories = workoutresult.getCalories();
+//			currentDate = workoutresult.getWorkoutDate().toString();
+//			finalElapsedTime = workoutresult.getElapsedTime();
+//			
+//			finalResult = Double.toString(finalDistance)+"    "+Double.toString(finalCalories)+"    "+currentDate+Double.toString(finalElapsedTime);
+//			Toast.makeText(WorkoutActivity.this, finalResult, Toast.LENGTH_LONG).show();
+//			Toast.makeText(WorkoutActivity.this, "Drasl", Toast.LENGTH_LONG).show();
 			
-			finalResult = Double.toString(finalDistance)+"    "+Double.toString(finalCalories)+"    "+currentDate+Double.toString(finalElapsedTime);
-			Toast.makeText(WorkoutActivity.this, finalResult, Toast.LENGTH_LONG).show();
-			
-//			runOnUiThread(new Runnable() {
-//
-//				@Override
-//				public void run() {
-//					Toast.makeText(WorkoutActivity.this, workoutresult.getEquipmentResultxml(), Toast.LENGTH_LONG).show();
-//				}
-//			});
+			runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					Toast.makeText(WorkoutActivity.this, workoutresult.getEquipmentResultxml(), Toast.LENGTH_LONG).show();
+				}
+			});
 			
 			
 		}
