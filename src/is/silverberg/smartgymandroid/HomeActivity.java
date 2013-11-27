@@ -16,7 +16,7 @@ import android.view.View;
 public class HomeActivity extends Activity {
 
 	/**
-	 * Called when activity is opened
+	 * Called when activity is opened.
 	 */
     @SuppressLint("NewApi")
     @Override
@@ -32,6 +32,17 @@ public class HomeActivity extends Activity {
     }
     
     /**
+     * Called when "start exercise" button is pressed.
+     * Opens exercise activity.
+     * @param view
+     */
+    public void openWorkout(View view) {
+    	Intent intent = new Intent(this, WorkoutActivity.class);
+    	startActivity(intent);
+    }
+    
+    
+    /**
      * Called when profiles button is pressed.
      * Opens profiles activity.
      * @param view
@@ -42,7 +53,7 @@ public class HomeActivity extends Activity {
     }
 
     /**
-     * Called when exercises button is presed.
+     * Called when exercises button is pressed.
      * Opens exercises activity.
      * @param view
      */

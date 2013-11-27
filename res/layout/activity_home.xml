@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         android:background="@android:color/black"
 		android:textColor="@android:color/white"
-        android:text="@string/start_exercise"/> 	
+        android:text="@string/start_exercise"
+        android:onClick="openWorkout"/> 	
 	<View
 	  android:layout_width="1dp"
 	  android:layout_height="30dp">
