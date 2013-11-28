@@ -6,9 +6,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.widget.Toast;
 
@@ -17,12 +15,14 @@ import com.lf.api.EquipmentObserver;
 import com.lf.api.models.WorkoutPreset;
 import com.lf.api.models.WorkoutResult;
 import com.lf.api.models.WorkoutStream;
-import is.silverberg.smartgymandroid.WorkoutActivity;
 
 public class LFOpen extends Service implements EquipmentObserver {
 	
 	static final String CONNECTED = "is.silverberg.smartgymandroid.CONNECTED";
 	
+	
+	private NotificationManager nm;
+    private Notification notification;
     private static final int NOTIFICATON_ID_STREAM = 8989;
 	public EquipmentObserver observer;
 	private static LFOpen _instance;
@@ -190,7 +190,7 @@ public class LFOpen extends Service implements EquipmentObserver {
 
 	@Override
 	public void onWorkoutResultReceived(WorkoutResult arg0) {
-		
+
 	}
 
 	@Override

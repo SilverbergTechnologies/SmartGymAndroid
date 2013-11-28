@@ -26,6 +26,8 @@ import com.jjoe64.graphview.LineGraphView;
  */
 public class ExerciseActivity extends Activity {
 	
+	Bundle extras;
+	String value;
 	TextView maxSpeed;
 	TextView minSpeed;
 	TextView distance;
@@ -105,11 +107,17 @@ public class ExerciseActivity extends Activity {
 			}
 		});
 
+		extras = getIntent().getExtras();
+		if (extras != null) {
+			value = extras.getString("workoutXML");
+		}
+		
+		
 		maxSpeed = (TextView)findViewById(R.id.maxSpeed);
 		minSpeed = (TextView)findViewById(R.id.minSpeed);
 		distance = (TextView)findViewById(R.id.distance);
 		maxSpeed.setText("Maximum speed: " + String.valueOf(max+5) + " km/h");
 		minSpeed.setText("Minimum speed: " + String.valueOf(min+5) + " km/h");
-		distance.setText("Distance: 5 km");
+		distance.setText(value);
 	}
 }

@@ -1,5 +1,6 @@
 package is.silverberg.smartgymandroid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -9,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -38,8 +38,9 @@ public class WorkoutActivity extends Activity {
 	private double finalCalories;
 	private String currentDate;
 	private double finalElapsedTime;
-	private int speedValue = 0;
+	private double speedValue = 0;
 	private int distanceValue = 0;
+	private ArrayList<Double> speedList;
 	private BroadcastReceiver broadCastReciever = new BroadcastReceiver() {
 
 		@Override
@@ -75,6 +76,7 @@ public class WorkoutActivity extends Activity {
 		findViewById(R.id.workout_btn).setOnClickListener(button_click);
 		 speed_display = (TextView)findViewById(R.id.speed_display);
 		 distance_display = (TextView)findViewById(R.id.distance_display);
+		 speedList = new ArrayList<Double>();
 	}
 	
 	private OnClickListener button_click = new OnClickListener() {
@@ -82,7 +84,7 @@ public class WorkoutActivity extends Activity {
 		@Override
 		public void onClick(View arg0) {
 			EquipmentManager.getInstance().sendSetWorkoutLevel(10);
-			EquipmentManager.getInstance().sendShowConsoleMessage("Level up one!");
+			EquipmentManager.getInstance().sendShowConsoleMessage("Level to ten!");
 		}
 	};
 
@@ -213,15 +215,20 @@ public class WorkoutActivity extends Activity {
 		public void onStreamReceived(WorkoutStream workoutstream) {
 //			Log.w("WorkoutActivity", "Stream received!");
 //			EquipmentManager.getInstance().sendShowConsoleMessage("Workout Stream");
-			speedValue = (int) workoutstream.getCurrentSpeed();
+			speedValue = workoutstream.getCurrentSpeed();
 			distanceValue = (int) workoutstream.getAccumulatedDistance();
 			
-			if (speed_display.isFocused() == false) {
-				speed_display.setText(speedValue + "");
-			}
-			if (distance_display.isFocused() == false) {
-				distance_display.setText(distanceValue + "");
-			}
+			speedList.add(speedValue);
+			
+//			if (speed_display.isFocused() == false) {
+//				speed_display.setText(speedValue + "");
+//			}
+//			if (distance_display.isFocused() == false) {
+//				distance_display.setText(distanceValue + "");
+//			}
+			
+			
+			
 //			new DisplayData().execute();
 //			level_display.setText(levelValue);
 			
@@ -229,6 +236,8 @@ public class WorkoutActivity extends Activity {
 
 		@Override
 		public void onWorkoutPaused() {
+			
+			Toast.makeText(WorkoutActivity.this, distanceValue, Toast.LENGTH_LONG).show();
 			// TODO Auto-generated method stub
 			
 		}
@@ -254,7 +263,9 @@ public class WorkoutActivity extends Activity {
 
 				@Override
 				public void run() {
-					Toast.makeText(WorkoutActivity.this, workoutresult.getEquipmentResultxml(), Toast.LENGTH_LONG).show();
+					Intent intent = new Intent(WorkoutActivity.this, ExerciseActivity.class);
+					intent.putExtra("workoutXML", workoutresult.getEquipmentResultxml());
+					startActivity(intent);
 				}
 			});
 			
@@ -268,18 +279,18 @@ public class WorkoutActivity extends Activity {
 	};
 	
 	
-	private class DisplayData extends AsyncTask<Void,Void,Void> {
-		@Override
-	     protected Void doInBackground(Void... urls) {
-	    	 speed_display.setText(speedValue);
-	    	 return null;
-	     }
-
-		@Override
-	     protected void onPostExecute(Void result) {
-	    	 super.onPostExecute(null);
-	     }
-	 }
+//	private class DisplayData extends AsyncTask<Void,Void,Void> {
+//		@Override
+//	     protected Void doInBackground(Void... urls) {
+//	    	 speed_display.setText(speedValue);
+//	    	 return null;
+//	     }
+//
+//		@Override
+//	     protected void onPostExecute(Void result) {
+//	    	 super.onPostExecute(null);
+//	     }
+//	 }
 	
 }
 
