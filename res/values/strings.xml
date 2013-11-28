@@ -4,9 +4,7 @@
     <string name="app_name">SmartGym</string>
     <string name="action_settings">Settings</string>
     <string name="profile_prompt">Choose a profile</string>
-
     <color name="black">#000000</color>
-
     <string-array name="profile_array">
         <item>Choose running profile</item>
         <item>Marathon</item>
@@ -41,5 +39,4 @@
     <string name="empty"></string>
     <string name="title_activity_workout">WorkoutActivity</string>
     <string name="workout_button">Press me!</string>
-
 </resources>
