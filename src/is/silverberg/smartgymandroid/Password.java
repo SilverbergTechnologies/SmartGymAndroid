@@ -5,7 +5,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-
+/**
+ * Class for handling password methods
+ * @author Daníel E. Vilhjálmsson
+ *
+ */
 public class Password {
         
         DBHandler dbHandler = new DBHandler(null, null, null, 1);

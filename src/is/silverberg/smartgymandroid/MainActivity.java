@@ -18,16 +18,19 @@ import com.lf.api.License;
 
 /**
  * Class for displaying and interacting with login screen
- * @author Silverberg
+ * @author Daníel Sveinsson
  *
  */
 public class MainActivity extends Activity {
 
-	public final static String EXTRA_EMAIL = "com.example.smartgym.EMAIL";
-	public final static String EXTRA_PASSWORD = "com.example.smartgym.PASSWORD";
+	final static String EXTRA_EMAIL = "com.example.smartgym.EMAIL";
+	final static String EXTRA_PASSWORD = "com.example.smartgym.PASSWORD";
 	
 	
 	@Override
+	/**
+	 * Called when a new intent is received
+	 */
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
 		checkIntentIfFromEquipement(intent);
@@ -35,6 +38,10 @@ public class MainActivity extends Activity {
 	}
 
 	@SuppressLint("NewApi")
+	/**
+	 * A method to check if a received intent is from exercise equipment
+	 * @param intent
+	 */
 	private void checkIntentIfFromEquipement(Intent intent) {
 		if (intent.getAction().equals(UsbManager.ACTION_USB_ACCESSORY_ATTACHED)) {
 			Toast.makeText(MainActivity.this, "USB accessory attached", Toast.LENGTH_LONG).show();
@@ -82,7 +89,9 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    /** Called when the user clicks the Login button */
+    /** Called when the user clicks the Login button 
+     *  @param view
+     */
     public void login(View view) {
     	Intent intent = new Intent(this, HomeActivity.class);
     	DBHandler dbHandler = new DBHandler(this, null, null, 1);

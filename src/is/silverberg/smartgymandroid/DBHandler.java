@@ -161,10 +161,14 @@ public class DBHandler extends SQLiteOpenHelper {
 		db.close();
 	}
 	
+	/**
+	 * A method to get workout data from database
+	 * @param id
+	 * @return XML String
+	 */
 	public String getWorkoutData(int id) {
 		String result;
 		String query = "SELECT * FROM " + TABLE_EXERCISE + " WHERE " + COLUMN_EID +  " = " + String.valueOf(id);
-//		String query = "SELECT * FROM " + TABLE_EXERCISE;
 		SQLiteDatabase db = this.getWritableDatabase();
 		
 		Cursor cursor = db.rawQuery(query, null);
@@ -180,6 +184,10 @@ public class DBHandler extends SQLiteOpenHelper {
 		return result;
 	}
 	
+	/**
+	 * A method to get number of entries in workout database
+	 * @return int result
+	 */
 	public int getWorkoutCount() {
 		int result;
 		String query = "SELECT count(*) FROM " + TABLE_EXERCISE;
@@ -187,7 +195,7 @@ public class DBHandler extends SQLiteOpenHelper {
 		Cursor cursor = db.rawQuery(query, null);
 		if(cursor.moveToFirst()) {
 			cursor.moveToFirst();
-			result = Integer.parseInt(cursor.getString(0));
+			result = Integer.parseInt(cursor.getString(0));//		String query = "SELECT * FROM " + TABLE_EXERCISE;
 			cursor.close();
 		} else {
 			result = 0;

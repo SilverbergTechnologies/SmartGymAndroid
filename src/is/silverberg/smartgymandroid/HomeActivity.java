@@ -11,7 +11,7 @@ import android.view.View;
 
 /**
  * Class for displaying and interacting with Home Activity
- * @author Silverberg
+ * @author Daníel Sveinsson
  *
  */
 public class HomeActivity extends Activity {

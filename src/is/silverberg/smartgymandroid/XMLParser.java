@@ -23,6 +23,11 @@ import org.xml.sax.SAXException;
 
 import android.util.Log;
 
+/**
+ * Class for parsing XML Strings
+ * @author Einar Jóhansson
+ *
+ */
 public class XMLParser {
 
 	// constructor

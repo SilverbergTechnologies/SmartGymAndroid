@@ -26,7 +26,7 @@ import com.jjoe64.graphview.LineGraphView;
 /**
  * Class for displaying activity and displaying exercise data.
  * UNFINISHED, Contains test data at the moment. 
- * @author Silverberg
+ * @author Einar Jóhannssson
  *
  */
 public class ExerciseActivity extends Activity {

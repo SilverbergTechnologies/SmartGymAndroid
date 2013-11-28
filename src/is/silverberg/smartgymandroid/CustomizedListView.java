@@ -16,17 +16,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-
+/**
+ * Activity for displaying and interacting with workout listview
+ * @author Einar Jóhansson
+ *
+ */
 public class CustomizedListView extends Activity {
-//  // All static variables
-//  static final String URL = "http://ej.is/entries.xml";
-//  // XML node keys
-//  static final String KEY_ENTRY = "entry"; // parent node
-	static final String KEY_ID = "id";
-//  static final String KEY_CALORIES = "calories";
-//  static final String KEY_DURATION = "duration";
-//  static final String KEY_DATE = "date";
 	
+	static final String KEY_ID = "id";	
 	static final String KEY_THUMB_URL = "thumb_url";
 	static final String KEY_DATE = "create-date";
 	static final String KEY_CALORIES = "calories";
@@ -39,6 +36,9 @@ public class CustomizedListView extends Activity {
     LazyAdapter adapter;
 
   @Override
+  /**
+   *  Called when Activity is opened
+   */
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
@@ -72,26 +72,8 @@ public class CustomizedListView extends Activity {
 		      map.put(KEY_DATE, dateString.substring(8,10)+"/"+dateString.substring(5,7));
 		      map.put(KEY_THUMB_URL, parser.getValue(e, KEY_THUMB_URL));
 		      exerciseList.add(map);
-	    }
-
-	      // adding HashList to ArrayList
-	    
+	    }	    
     }
-
-//    for (int i = 0; i < nl.getLength() ; i++) {
-//      // creating new HashMap
-//      HashMap<String, String> map = new HashMap<String, String>();
-//      Element e = (Element) nl.item(i);
-//      // adding each child node to HashMap key => value
-//      map.put(KEY_CALORIES, parser.getValue(e, KEY_CALORIES) + " calories");
-//      map.put(KEY_DURATION, parser.getValue(e, KEY_DURATION) + "min");
-//      map.put(KEY_DATE, parser.getValue(e, KEY_DATE));
-//      map.put(KEY_THUMB_URL, parser.getValue(e, KEY_THUMB_URL));
-//
-//      // adding HashList to ArrayList
-//      exerciseList.add(map);
-//    }
-
 
     list=(ListView)findViewById(R.id.list);
 

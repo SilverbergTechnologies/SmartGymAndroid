@@ -10,7 +10,7 @@ import android.view.MenuItem;
 /**
  * Class for displaying and interacting with Profiles Activity
  * UNFINISHED
- * @author Silverberg
+ * @author Daníel E. Vilhjálmsson
  *
  */
 public class ProfilesActivity extends Activity {

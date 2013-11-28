@@ -1,6 +1,5 @@
 package is.silverberg.smartgymandroid;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -27,15 +26,19 @@ import com.lf.api.models.WorkoutPreset;
 import com.lf.api.models.WorkoutResult;
 import com.lf.api.models.WorkoutStream;
 
+/**
+ * Class for handling and interacting with workout activity
+ * @author Kjartan B. Kristjánsson
+ *
+ */
 public class WorkoutActivity extends Activity {
 
 	TextView workoutMsg;
 	Button workout_btn;
 	TextView speed_display;
 	TextView distance_display;
-	private double speedValue = 0;
-	private int distanceValue = 0;
-	private ArrayList<Double> speedList;
+	
+	// An instance of BroadcastReceiver is created for connecting to equipment
 	private BroadcastReceiver broadCastReciever = new BroadcastReceiver() {
 
 		@Override
@@ -45,13 +48,17 @@ public class WorkoutActivity extends Activity {
 	};
 	
 	@Override
+	/**
+	 * Called when activity is opened
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_workout);
 		
+		// Check if LifeFitness license is valid
 		if(License.getInstance().isLicenseValid()) {
 			workoutMsg = (TextView)findViewById(R.id.workout_msg);
-//			workoutMsg.setText("Leyfi er virkt!");	
+			workoutMsg.setText("Leyfi er virkt!");	
 		}
 		
 		
@@ -69,9 +76,8 @@ public class WorkoutActivity extends Activity {
 		Context.BIND_AUTO_CREATE);
 		
 		findViewById(R.id.workout_btn).setOnClickListener(button_click);
-		 speed_display = (TextView)findViewById(R.id.speed_display);
-		 distance_display = (TextView)findViewById(R.id.distance_display);
-		 speedList = new ArrayList<Double>();
+		speed_display = (TextView)findViewById(R.id.speed_display);
+		distance_display = (TextView)findViewById(R.id.distance_display);
 	}
 	
 	private OnClickListener button_click = new OnClickListener() {
@@ -84,6 +90,9 @@ public class WorkoutActivity extends Activity {
 	};
 
 	@Override
+	/**
+	 * Called when options menu is created
+	 */
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.workout, menu);
@@ -93,12 +102,18 @@ public class WorkoutActivity extends Activity {
 	
 	
 	@Override
+	/**
+	 * Called when activity is closed
+	 */
 	protected void onPause() {
 		super.onStop();
 		unregisterReceiver(broadCastReciever);
 	}
 
 	@Override
+	/**
+	 * Called when activity is opened
+	 */
 	protected void onResume() {
 		super.onResume();
 		registerReceiver(broadCastReciever, new IntentFilter(LFOpen.CONNECTED));
@@ -109,15 +124,18 @@ public class WorkoutActivity extends Activity {
 	
 	
 	@SuppressWarnings("unused")
+	// An instance of EquipmentObserver that connects to LifeFitness equipment
 	private EquipmentObserver cObserver = new EquipmentObserver() {
 
 		@Override
 		public void onAutoLoginRequest() {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
+		/**
+		 * Called when equipment connection is successful
+		 */
 		public void onConnected() {
 			
 			WorkoutActivity.this.runOnUiThread(new Runnable() {
@@ -131,124 +149,95 @@ public class WorkoutActivity extends Activity {
 
 		@Override
 		public void onConnection() {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onConsoleMaxInclineReceived(double arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onConsoleMaxTimeReceived(int arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onConsoleUnitsReceived(byte arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onDisconnected() {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
+		/**
+		 * Called when error occurs
+		 */
 		public void onError(Exception arg0) {
-			Log.e("WorkoutActivity", "Error herna!", arg0);
+			Log.e("WorkoutActivity", "Error!", arg0);
 		}
 
 		@Override
 		public void onInit() {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public List<WorkoutPreset> onSendingWorkoutPreset() {
-			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
 		public void onSetWorkoutInclineAckReceived(boolean arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onSetWorkoutLevelAckReceived(boolean arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onSetWorkoutThrAckReceived(boolean arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onSetWorkoutWattsAckReceived(boolean arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onShowConsoleMessageAckReceived(boolean arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
+		/**
+		 * Called when data is received from equipment
+		 */
 		public void onStreamReceived(WorkoutStream workoutstream) {
-//			Log.w("WorkoutActivity", "Stream received!");
-//			EquipmentManager.getInstance().sendShowConsoleMessage("Workout Stream");
-			speedValue = workoutstream.getCurrentSpeed();
-			distanceValue = (int) workoutstream.getAccumulatedDistance();
-			
-			speedList.add(speedValue);
-			
-//			if (speed_display.isFocused() == false) {
-//				speed_display.setText(speedValue + "");
-//			}
-//			if (distance_display.isFocused() == false) {
-//				distance_display.setText(distanceValue + "");
-//			}
-			
-			
-			
-//			new DisplayData().execute();
-//			level_display.setText(levelValue);
 			
 		}
 
 		@Override
 		public void onWorkoutPaused() {
 			
-			Toast.makeText(WorkoutActivity.this, distanceValue, Toast.LENGTH_LONG).show();
-			// TODO Auto-generated method stub
-			
 		}
 
 		@Override
 		public void onWorkoutPresetSent() {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
+		/**
+		 * Called when workout result is received (exercise is finished by user)
+		 */
 		public void onWorkoutResultReceived(final WorkoutResult workoutresult) {
-//			
-//			finalResult = Double.toString(finalDistance)+"    "+Double.toString(finalCalories)+"    "+currentDate+Double.toString(finalElapsedTime);
-//			Toast.makeText(WorkoutActivity.this, finalResult, Toast.LENGTH_LONG).show();
-//			Toast.makeText(WorkoutActivity.this, "Drasl", Toast.LENGTH_LONG).show();
 			
 			runOnUiThread(new Runnable() {
 				@Override
@@ -259,8 +248,6 @@ public class WorkoutActivity extends Activity {
 					startActivity(intent);
 				}
 			});
-			
-			
 		}
 
 		@Override
