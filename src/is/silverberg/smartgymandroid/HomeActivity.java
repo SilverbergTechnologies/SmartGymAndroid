@@ -35,6 +35,11 @@ public class HomeActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
     
+    public void openIndex(View view) {
+        Intent intent = new Intent(this, CustomizedListView.class);
+        startActivity(intent);
+    }
+    
     public void openProfiles(View view) {
         Intent intent = new Intent(this, ProfilesActivity.class);
         startActivity(intent);

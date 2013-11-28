@@ -4,8 +4,8 @@
     <string name="app_name">SmartGym</string>
     <string name="action_settings">Settings</string>
     <string name="profile_prompt">Choose a profile</string>
-	<color name="black">#000000</color>
-	
+        <color name="black">#000000</color>
+        
     <string-array name="profile_array">
         <item>Choose running profile</item>
         <item>Marathon</item>
@@ -25,6 +25,7 @@
 
     <string name="full_name_hint">Full name</string>
     <string name="email_hint">E-mail</string>
+    <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
@@ -36,5 +37,6 @@
     <string name="title_activity_profiles">ProfilesActivity</string>
     <string name="title_activity_exercise">ExerciseActivity</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="empty"></string>
 
 </resources>
