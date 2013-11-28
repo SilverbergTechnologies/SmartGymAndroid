@@ -110,7 +110,7 @@ public class ExerciseActivity extends Activity {
                         }
                 });
 
-<<<<<<< HEAD
+
 		extras = getIntent().getExtras();
 		if (extras != null) {
 			value = extras.getString("workoutXML");
@@ -124,13 +124,5 @@ public class ExerciseActivity extends Activity {
 		minSpeed.setText("Minimum speed: " + String.valueOf(min+5) + " km/h");
 		distance.setText(value);
 	}
-=======
-                maxSpeed = (TextView)findViewById(R.id.maxSpeed);
-                minSpeed = (TextView)findViewById(R.id.minSpeed);
-                distance = (TextView)findViewById(R.id.distance);
-                maxSpeed.setText("Maximum speed: " + String.valueOf(max+5) + " km/h");
-                minSpeed.setText("Minimum speed: " + String.valueOf(min+5) + " km/h");
-                distance.setText("Distance: 5 km");
-        }
->>>>>>> 7c2a56f67cff4bb0c16e71b55f001425fb530977
+
 }
