@@ -6,17 +6,15 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.hardware.usb.UsbAccessory;
+import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import android.hardware.usb.UsbAccessory;
-import android.hardware.usb.UsbManager;
 import com.lf.api.License;
-import is.silverberg.smartgymandroid.LFOpen;
 
 /**
  * Class for displaying and interacting with login screen
@@ -101,7 +99,7 @@ public class MainActivity extends Activity {
     		
     	} else {
 	    	try {
-	    		result = dbHandler.checkPassword(passwordInput.getText().toString(), user.getPassword(), user.getSalt());    		
+	    		result = Password.checkPassword(passwordInput.getText().toString(), user.getPassword(), user.getSalt());    		
 	    	} catch( NoSuchAlgorithmException e ) {}
     	}
     	if(result) {

@@ -25,6 +25,7 @@ import com.jjoe64.graphview.LineGraphView;
  *
  */
 public class ExerciseActivity extends Activity {
+
 	
 	Bundle extras;
 	String value;
@@ -40,73 +41,76 @@ public class ExerciseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_exercise);
 
-		// init example series data
-		Random rand = new Random();
-		int size = 20;
-		GraphViewData[] data = new GraphViewData[size];
-		for (int i=0; i<size; i++) {
-			int tmp = rand.nextInt(15);
-			if(i==0){ max = tmp; min = tmp; }
-			if(tmp > max) { max = tmp; }
-			if(tmp < min) { min = tmp; }
-			data[i] = new GraphViewData(i, tmp+5);
-		}
-		GraphViewSeries exampleSeries = new GraphViewSeries(data);
 
-		GraphView graphView;
 
-		graphView = new LineGraphView(
-				this // context
-				, "km / hour" // heading
-		);
-		
-		graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.BLACK);  
-		graphView.getGraphViewStyle().setVerticalLabelsColor(Color.BLACK);
-		graphView.addSeries(exampleSeries); // data
-		graphView.setCustomLabelFormatter(new CustomLabelFormatter() {
-			@Override
-			public String formatLabel(double value, boolean isValueX) {
+                // init example series data
+                Random rand = new Random();
+                int size = 20;
+                GraphViewData[] data = new GraphViewData[size];
+                for (int i=0; i<size; i++) {
+                        int tmp = rand.nextInt(15);
+                        if(i==0){ max = tmp; min = tmp; }
+                        if(tmp > max) { max = tmp; }
+                        if(tmp < min) { min = tmp; }
+                        data[i] = new GraphViewData(i, tmp+5);
+                }
+                GraphViewSeries exampleSeries = new GraphViewSeries(data);
 
-				return null; // let graphview generate Y-axis label for us
-			}
-		});
-		LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
-		layout.addView(graphView);
+                GraphView graphView;
 
-		/*
-		 * use Date as x axis label
-		 */
-		long now = new Date().getTime();
-		data = new GraphViewData[size];
-		for (int i=0; i<size; i++) {
-			data[i] = new GraphViewData(now+(i*60*60*24*1000), rand.nextInt(20)); // next day
-		}
-		exampleSeries = new GraphViewSeries(data);
+                graphView = new LineGraphView(
+                                this // context
+                                , "km / hour" // heading
+                );
+                
+                graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.BLACK);  
+                graphView.getGraphViewStyle().setVerticalLabelsColor(Color.BLACK);
+                graphView.addSeries(exampleSeries); // data
+                graphView.setCustomLabelFormatter(new CustomLabelFormatter() {
+                        @Override
+                        public String formatLabel(double value, boolean isValueX) {
 
-		graphView = new LineGraphView(
-				this
-				, "GraphViewDemo"
-		);
-		((LineGraphView) graphView).setDrawBackground(true);
+                                return null; // let graphview generate Y-axis label for us
+                        }
+                });
+                LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
+                layout.addView(graphView);
 
-		graphView.addSeries(exampleSeries); // data
+                /*
+                 * use Date as x axis label
+                 */
+                long now = new Date().getTime();
+                data = new GraphViewData[size];
+                for (int i=0; i<size; i++) {
+                        data[i] = new GraphViewData(now+(i*60*60*24*1000), rand.nextInt(20)); // next day
+                }
+                exampleSeries = new GraphViewSeries(data);
 
-		/*
-		 * date as label formatter
-		 */
-		final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d");
+                graphView = new LineGraphView(
+                                this
+                                , "GraphViewDemo"
+                );
+                ((LineGraphView) graphView).setDrawBackground(true);
 
-		graphView.setCustomLabelFormatter(new CustomLabelFormatter() {
-			@Override
-			public String formatLabel(double value, boolean isValueX) {
-				if (isValueX) {
-					Date d = new Date((long) value);
-					return dateFormat.format(d);
-				}
-				return null; // let graphview generate Y-axis label for us
-			}
-		});
+                graphView.addSeries(exampleSeries); // data
 
+                /*
+                 * date as label formatter
+                 */
+                final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d");
+
+                graphView.setCustomLabelFormatter(new CustomLabelFormatter() {
+                        @Override
+                        public String formatLabel(double value, boolean isValueX) {
+                                if (isValueX) {
+                                        Date d = new Date((long) value);
+                                        return dateFormat.format(d);
+                                }
+                                return null; // let graphview generate Y-axis label for us
+                        }
+                });
+
+<<<<<<< HEAD
 		extras = getIntent().getExtras();
 		if (extras != null) {
 			value = extras.getString("workoutXML");
@@ -120,4 +124,13 @@ public class ExerciseActivity extends Activity {
 		minSpeed.setText("Minimum speed: " + String.valueOf(min+5) + " km/h");
 		distance.setText(value);
 	}
+=======
+                maxSpeed = (TextView)findViewById(R.id.maxSpeed);
+                minSpeed = (TextView)findViewById(R.id.minSpeed);
+                distance = (TextView)findViewById(R.id.distance);
+                maxSpeed.setText("Maximum speed: " + String.valueOf(max+5) + " km/h");
+                minSpeed.setText("Minimum speed: " + String.valueOf(min+5) + " km/h");
+                distance.setText("Distance: 5 km");
+        }
+>>>>>>> 7c2a56f67cff4bb0c16e71b55f001425fb530977
 }

@@ -1,9 +1,7 @@
 package is.silverberg.smartgymandroid;
 
 import java.math.BigInteger;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -73,7 +71,7 @@ public class DBHandler extends SQLiteOpenHelper {
 		values.put(COLUMN_NAME, user.getName());
 		values.put(COLUMN_EMAIL, user.getEmail());
 		String[] pw = new String[2];
-		pw = hashPassword(user.getPassword(), null);
+		pw = Password.hashPassword(user.getPassword(), null);
 		values.put(COLUMN_PWHASH, pw[0]);
 		values.put(COLUMN_PWSALT, pw[1]);
 		
@@ -133,44 +131,14 @@ public class DBHandler extends SQLiteOpenHelper {
 	}
 	
 	/**
-	 * A method to hash user passwords.
-	 * @param password
-	 * @param salt
-	 * @return String Array with hashed password and generated salt
-	 * @throws NoSuchAlgorithmException
-	 */
-	private String[] hashPassword(String password, String salt) throws NoSuchAlgorithmException {
-		String[] s = new String[2];
-		SecureRandom r = new SecureRandom();
-		byte[] saltBytes = new byte[32];
-		if(salt == null) {
-			r.nextBytes(saltBytes);
-		} else {
-			saltBytes = fromHex(salt);
-		}
-		
-		MessageDigest digest = MessageDigest.getInstance("SHA-256");
-		digest.reset();
-		digest.update(saltBytes);
-		s[0] = toHex(digest.digest(password.getBytes()));
-		s[1] = toHex(saltBytes);
-		return s;
-	}
-	
-	/**
-	 * A method to check if input password is valid
-	 * @param username
-	 * @param password
+	 * 
+	 * @param email
 	 * @return
-	 * @throws NoSuchAlgorithmException
 	 */
-	public boolean checkPassword(String newPassword, String oldPassword, String salt) throws NoSuchAlgorithmException{
-		boolean result = false;
-			
-		String newPw = hashPassword(newPassword, salt)[0];
-		if( oldPassword.equals(newPw) ) { result = true; }
-		
-		return result;
+	public String getPassword( String email ) {
+		User user = findUser( email );
+		String password = user.getPassword();
+		return password;
 	}
 	
 	/**
