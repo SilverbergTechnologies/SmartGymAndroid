@@ -1,6 +1,5 @@
 package is.silverberg.smartgymandroid;
 
-import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 
 import android.content.ContentValues;
@@ -21,6 +20,7 @@ public class DBHandler extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "SmartGymDB.db";
 	private static final String TABLE_USERS = "users";
+	private static final String TABLE_EXERCISE = "exercise";
 	
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_NAME = "name";
@@ -28,6 +28,8 @@ public class DBHandler extends SQLiteOpenHelper {
 	public static final String COLUMN_PWHASH = "pwhash";
 	public static final String COLUMN_PWSALT = "pwsalt";
 	
+	public static final String COLUMN_EID = "_eid";
+	public static final String COLUMN_XML = "xml";
 	/**
 	 * Constructor
 	 * @param context
@@ -49,6 +51,9 @@ public class DBHandler extends SQLiteOpenHelper {
 				" TEXT," + COLUMN_EMAIL + " TEXT," + COLUMN_PWHASH + " TEXT," +
 				COLUMN_PWSALT + " TEXT" + ")";
 		db.execSQL(CREATE_USER_TABLE);
+		String CREATE_EXERCISE_TABLE = "CREATE TABLE " + TABLE_EXERCISE +
+				"(" + COLUMN_EID + " INTEGER PRIMARY KEY," + COLUMN_XML + " TEXT" + ")";
+		db.execSQL(CREATE_EXERCISE_TABLE);
 	}
 
 
@@ -58,6 +63,7 @@ public class DBHandler extends SQLiteOpenHelper {
 	 */
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXERCISE);
 		onCreate(db);
 	}
 	
@@ -131,7 +137,7 @@ public class DBHandler extends SQLiteOpenHelper {
 	}
 	
 	/**
-	 * 
+	 * A method to get hashed password of user from database
 	 * @param email
 	 * @return
 	 */
@@ -142,39 +148,37 @@ public class DBHandler extends SQLiteOpenHelper {
 	}
 	
 	/**
-	 * A method to convert a hexadecimal String to byte array
-	 * @param hex
-	 * @return
+	 * A method to add workout results to database
+	 * @param xml
 	 */
-    private byte[] fromHex(String hex)
-    {
-        byte[] binary = new byte[hex.length() / 2];
-        for(int i = 0; i < binary.length; i++)
-        {
-            binary[i] = (byte)Integer.parseInt(hex.substring(2*i, 2*i+2), 16);
-        }
-        return binary;
-    }
-
-    /**
-     * A method to convert a byte array to a hexadecimal String
-     * @param array
-     * @return
-     */
-	public String toHex(byte[] array)
-    {
-        BigInteger bi = new BigInteger(1, array);
-        String hex = bi.toString(16);
-        int paddingLength = (array.length * 2) - hex.length();
-        if(paddingLength > 0)
-        {
-            return String.format("%0" + paddingLength + "d", 0) + hex;
-        }
-        else
-        {
-            return hex;
-        }
-    }
+	public void addWorkoutData(String xml) {
+		ContentValues values = new ContentValues();
+		values.put(COLUMN_XML, xml);
+		
+		SQLiteDatabase db = this.getWritableDatabase();
+		
+		db.insert(TABLE_EXERCISE, null, values);
+		db.close();
+	}
+	
+	public String getWorkoutData() {
+		String result;
+//		String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_EID +  " =  \"" + Integer.toString(id) + "\"";
+		String query = "SELECT * FROM " + TABLE_EXERCISE;
+		SQLiteDatabase db = this.getWritableDatabase();
+		
+		Cursor cursor = db.rawQuery(query, null);
+		
+		if(cursor.moveToFirst()) {
+			cursor.moveToFirst();
+			result = cursor.getString(1);
+			cursor.close();
+		} else {
+			result = null;
+		}
+		db.close();
+		return result;
+	}
 	
 }
 

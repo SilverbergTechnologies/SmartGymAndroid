@@ -57,10 +57,6 @@ public class MainActivity extends Activity {
 
 	}
 	
-	
-	
-	/* ----------------------------------------------------------------------------------*/
-	
 	/**
 	 * Called when activity is opened
 	 */
@@ -73,7 +69,6 @@ public class MainActivity extends Activity {
         License.getInstance().setLicense(this,"380-5619134716-54906");
         
 		checkIntentIfFromEquipement(getIntent());
-
     }
 
 
@@ -95,9 +90,7 @@ public class MainActivity extends Activity {
     	EditText passwordInput = (EditText) findViewById(R.id.password);
     	User user = dbHandler.findUser(emailInput.getText().toString());
     	boolean result = false;
-    	if( user == null ) { 
-    		
-    	} else {
+    	if( user != null ) { 
 	    	try {
 	    		result = Password.checkPassword(passwordInput.getText().toString(), user.getPassword(), user.getSalt());    		
 	    	} catch( NoSuchAlgorithmException e ) {}

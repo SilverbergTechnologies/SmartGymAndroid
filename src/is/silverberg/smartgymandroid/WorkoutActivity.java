@@ -33,11 +33,6 @@ public class WorkoutActivity extends Activity {
 	Button workout_btn;
 	TextView speed_display;
 	TextView distance_display;
-	private String finalResult;
-	private double finalDistance;
-	private double finalCalories;
-	private String currentDate;
-	private double finalElapsedTime;
 	private double speedValue = 0;
 	private int distanceValue = 0;
 	private ArrayList<Double> speedList;
@@ -250,21 +245,17 @@ public class WorkoutActivity extends Activity {
 
 		@Override
 		public void onWorkoutResultReceived(final WorkoutResult workoutresult) {
-//			finalDistance = workoutresult.getDistance();
-//			finalCalories = workoutresult.getCalories();
-//			currentDate = workoutresult.getWorkoutDate().toString();
-//			finalElapsedTime = workoutresult.getElapsedTime();
 //			
 //			finalResult = Double.toString(finalDistance)+"    "+Double.toString(finalCalories)+"    "+currentDate+Double.toString(finalElapsedTime);
 //			Toast.makeText(WorkoutActivity.this, finalResult, Toast.LENGTH_LONG).show();
 //			Toast.makeText(WorkoutActivity.this, "Drasl", Toast.LENGTH_LONG).show();
 			
 			runOnUiThread(new Runnable() {
-
 				@Override
 				public void run() {
+					DBHandler dbHandler = new DBHandler(WorkoutActivity.this, null, null, 1);
+					dbHandler.addWorkoutData(workoutresult.getEquipmentResultxml());
 					Intent intent = new Intent(WorkoutActivity.this, ExerciseActivity.class);
-					intent.putExtra("workoutXML", workoutresult.getEquipmentResultxml());
 					startActivity(intent);
 				}
 			});
@@ -277,20 +268,6 @@ public class WorkoutActivity extends Activity {
 			
 		}
 	};
-	
-	
-//	private class DisplayData extends AsyncTask<Void,Void,Void> {
-//		@Override
-//	     protected Void doInBackground(Void... urls) {
-//	    	 speed_display.setText(speedValue);
-//	    	 return null;
-//	     }
-//
-//		@Override
-//	     protected void onPostExecute(Void result) {
-//	    	 super.onPostExecute(null);
-//	     }
-//	 }
 	
 }
 

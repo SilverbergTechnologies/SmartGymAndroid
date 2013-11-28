@@ -26,8 +26,6 @@ import com.jjoe64.graphview.LineGraphView;
  */
 public class ExerciseActivity extends Activity {
 
-	
-	Bundle extras;
 	String value;
 	TextView maxSpeed;
 	TextView minSpeed;
@@ -111,10 +109,8 @@ public class ExerciseActivity extends Activity {
                 });
 
 
-		extras = getIntent().getExtras();
-		if (extras != null) {
-			value = extras.getString("workoutXML");
-		}
+        DBHandler dbHandler = new DBHandler(this, null, null, 1);
+        value = dbHandler.getWorkoutData();
 		
 		
 		maxSpeed = (TextView)findViewById(R.id.maxSpeed);
