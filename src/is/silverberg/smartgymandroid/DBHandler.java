@@ -52,7 +52,7 @@ public class DBHandler extends SQLiteOpenHelper {
 				COLUMN_PWSALT + " TEXT" + ")";
 		db.execSQL(CREATE_USER_TABLE);
 		String CREATE_EXERCISE_TABLE = "CREATE TABLE " + TABLE_EXERCISE +
-				"(" + COLUMN_EID + " INTEGER PRIMARY KEY," + COLUMN_XML + " TEXT" + ")";
+				"(" + COLUMN_EID + " INTEGER PRIMARY KEY," + COLUMN_XML + " TEXT UNIQUE" + ")";
 		db.execSQL(CREATE_EXERCISE_TABLE);
 	}
 
@@ -161,10 +161,10 @@ public class DBHandler extends SQLiteOpenHelper {
 		db.close();
 	}
 	
-	public String getWorkoutData() {
+	public String getWorkoutData(int id) {
 		String result;
-//		String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_EID +  " =  \"" + Integer.toString(id) + "\"";
-		String query = "SELECT * FROM " + TABLE_EXERCISE;
+		String query = "SELECT * FROM " + TABLE_EXERCISE + " WHERE " + COLUMN_EID +  " = " + String.valueOf(id);
+//		String query = "SELECT * FROM " + TABLE_EXERCISE;
 		SQLiteDatabase db = this.getWritableDatabase();
 		
 		Cursor cursor = db.rawQuery(query, null);
@@ -175,6 +175,22 @@ public class DBHandler extends SQLiteOpenHelper {
 			cursor.close();
 		} else {
 			result = null;
+		}
+		db.close();
+		return result;
+	}
+	
+	public int getWorkoutCount() {
+		int result;
+		String query = "SELECT count(*) FROM " + TABLE_EXERCISE;
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+		if(cursor.moveToFirst()) {
+			cursor.moveToFirst();
+			result = Integer.parseInt(cursor.getString(0));
+			cursor.close();
+		} else {
+			result = 0;
 		}
 		db.close();
 		return result;

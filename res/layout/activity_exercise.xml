@@ -15,24 +15,24 @@
                         android:id="@+id/graph1" />
                 
                 <TextView
-                    android:id="@+id/maxSpeed"
+                    android:id="@+id/averageSpeed"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/graph1"
                     android:textSize="20sp"
                     android:text="@string/empty" />
                 <TextView
-                    android:id="@+id/minSpeed"
+                    android:id="@+id/duration"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/maxSpeed"
+                    android:layout_below="@id/averageSpeed"
                     android:textSize="20sp"
                     android:text="@string/empty" />
                 <TextView
-                    android:id="@+id/distance"
+                    android:id="@+id/calories"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/minSpeed"
+                    android:layout_below="@id/duration"
                     android:textSize="20sp"
                     android:text="@string/empty" />
 

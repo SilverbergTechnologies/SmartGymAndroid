@@ -51,7 +51,7 @@ public class WorkoutActivity extends Activity {
 		
 		if(License.getInstance().isLicenseValid()) {
 			workoutMsg = (TextView)findViewById(R.id.workout_msg);
-			workoutMsg.setText("Leyfi er virkt!");	
+//			workoutMsg.setText("Leyfi er virkt!");	
 		}
 		
 		
@@ -255,7 +255,7 @@ public class WorkoutActivity extends Activity {
 				public void run() {
 					DBHandler dbHandler = new DBHandler(WorkoutActivity.this, null, null, 1);
 					dbHandler.addWorkoutData(workoutresult.getEquipmentResultxml());
-					Intent intent = new Intent(WorkoutActivity.this, ExerciseActivity.class);
+					Intent intent = new Intent(WorkoutActivity.this, CustomizedListView.class);
 					startActivity(intent);
 				}
 			});
